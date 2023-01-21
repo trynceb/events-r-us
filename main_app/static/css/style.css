@@ -1,0 +1,30 @@
+/* Set the height of the navbar to the full height of the page */
+.navbar {
+    height: 100vh;
+}
+
+/* Style the links in the navbar */
+.navbar-nav a {
+    color: white; /* or any other color you prefer */
+    text-decoration: none;
+    padding: 1rem;
+    display: block;
+}
+
+/* Add a background color to the navbar */
+.navbar {
+    background-color: #3F51B5; /* or any other color you prefer */
+}
+
+/* Add hover effect to links in the navbar */
+.navbar-nav a:hover {
+    background-color: #333; /* or any other color you prefer */
+}
+
+.navbar-nav .nav-item {
+    background-color: #3F51B5; /* or any other color you prefer */
+}
+
+.navbar-nav .nav-item a {
+    color: white; /* or any other color you prefer */
+}
