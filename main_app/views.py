@@ -7,6 +7,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def home(request):
   return render(request, 'home.html')
 
+def index(request):
+    return render(request, 'index.html')
+
+def my_events(request):
+    return render(request, 'my_events.html')
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
