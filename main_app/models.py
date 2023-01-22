@@ -35,6 +35,7 @@ class Events(models.Model):
     date = models.DateField(default=date.today)
     time = models.TimeField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
+    description = models.CharField(max_length=1000, default='', blank=True)
     
     def __str__(self):
         return f"{self.name} - {self.location}"
