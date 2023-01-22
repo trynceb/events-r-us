@@ -3,15 +3,20 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Events
 
 def home(request):
-  return render(request, 'home.html')
+    events = Events.objects.all()
+    return render(request, 'home.html', { 'events': events})
 
 def index(request):
     return render(request, 'index.html')
 
 def my_events(request):
     return render(request, 'my_events.html')
+
+def event_details(request):
+    return render(request, 'details.html')
 
 def signup(request):
   error_message = ''

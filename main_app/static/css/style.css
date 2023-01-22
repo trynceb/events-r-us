@@ -28,3 +28,7 @@
 .navbar-nav .nav-item a {
     color: white; /* or any other color you prefer */
 }
+
+.nav-link {
+    margin: 10px;
+}
