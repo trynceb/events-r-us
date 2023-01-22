@@ -8,12 +8,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item">Most recent event</li>
-                <li class="list-group-item">Most recent event</li>
-                <li class="list-group-item">Most recent event</li>
-            </ul>
+        <div class="col-md-8">
+            <div class="card-columns">
+                {% for event in events %}
+                    <div class="card">
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="event image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">{{ event.description }}</p>
+                            <a href="{% url 'details' event.id %}" class="btn btn-primary">View Event</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
