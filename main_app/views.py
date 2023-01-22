@@ -10,7 +10,7 @@ def home(request):
     return render(request, 'home.html', { 'events': events})
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'events/index.html')
 
 def my_events(request):
     return render(request, 'my_events.html')
