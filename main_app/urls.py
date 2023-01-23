@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
+from .views import HomeView, IndexView, MyEventsView, EventDetailsView, SignUpView
 
 urlpatterns = [
-    path('accounts/signup', views.signup, name='signup'),
-    path('', views.home, name='home'),
-    path('events/', views.index, name='index'),
-    path('my-events', views.my_events, name='my_events'),
-    path('events/<int:event_id>/', views.event_details, name='details')
+    path('accounts/signup/', SignUpView.as_view(), name='signup'),
+    path('', HomeView.as_view(), name='home'),
+    path('events/', IndexView.as_view(), name='index'),
+    path('my-events/', MyEventsView.as_view(), name='my_events'),
+    path('events/<int:pk>/', EventDetailsView.as_view(), name='details')
 ]
+

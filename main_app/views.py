@@ -1,43 +1,60 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView, DetailView, CreateView
 from .models import Events
 
-def home(request):
-    events = Events.objects.all()
-    return render(request, 'home.html', { 'events': events})
+class HomeView(ListView):
+    model = Events
+    template_name = 'home.html'
+    context_object_name = 'events'
 
-def index(request):
-    events = Events.objects.all()
-    return render(request, 'events/index.html', { 'events': events})
+class IndexView(ListView):
+    model = Events
+    template_name = 'events/index.html'
+    context_object_name = 'events'
 
-def my_events(request):
-  return render(request, 'my_events.html')
+class MyEventsView(LoginRequiredMixin, TemplateView):
+    template_name = 'my_events.html'
 
-def event_details(request, event_id):
-  event= Events.objects.get(id=event_id)
-  return render(request, 'events/details.html', {
-    'events': event
-  })
+class EventDetailsView(DetailView):
+    model = Events
+    template_name = 'events/details.html'
+    context_object_name = 'event'
+    pk_url_kwarg = 'event_id'
 
-def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      login(request, user)
-      return redirect('index')
-    else:
-      error_message = 'Invalid sign up - try again'
-  form = UserCreationForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('index')
+    template_name = 'registration/signup.html'
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form, error_message='Invalid sign up - try again'))
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('index')
+
+
+# def signup(request):
+#   error_message = ''
+#   if request.method == 'POST':
+#     form = UserCreationForm(request.POST)
+#     if form.is_valid():
+#       user = form.save()
+#       login(request, user)
+#       return redirect('index')
+#     else:
+#       error_message = 'Invalid sign up - try again'
+#   form = UserCreationForm()
+#   context = {'form': form, 'error_message': error_message}
+#   return render(request, 'registration/signup.html', context)
 
   
-@login_required
+# @login_required
 def test(request):
     pass
 
