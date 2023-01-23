@@ -21,16 +21,28 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <h5>User Reviews</h5>
+            {% if object%}
+            <h5>User Reviews: </h5>
             {% for review in reviews %}
-                <div class="card">
-                    <div class="card-body">
-                        <p><strong>{{ review.username }}</strong> - {{ review.review_text }}</p>
-                    </div>
+            <div class="review-card">
+                <div class="card-body">
+                    <p><strong>{{ review.username }}</strong> - {{ review.review_text }}</p>
                 </div>
+            </div>
             {% endfor %}
+            <form action="" method="POST">
+                <h5>Add reviews</h5>
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="Add your review" class="btn">
+            </form>
+            {% else %}
+            <h1>No reviews</h1>
+            {% endif %}
         </div>
     </div>
 </div>
-    
+
 {% endblock %}
