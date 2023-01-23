@@ -7,16 +7,15 @@
         <div class="col-sm-6">
             <h3>Title</h3>
             <ul>
-                <li><strong>Location: </strong>{{ location }}</li>
-                <li><strong>Date: </strong>{{ date }}</li>
-                <li><strong>Time: </strong>{{ time }}</li>
-                <li><strong>Description: </strong>{{ description }}</li>
+                <li><strong>Location: </strong>{{ events.location }}</li>
+                <li><strong>Date: </strong>{{ events.date }}</li>
+                <li><strong>Time: </strong>{{ events.time }}</li>
+                <li><strong>Description: </strong>{{ events.description }}</li>
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <a href="{% url 'add_review' %}" class="btn btn-primary">Add A Review</a>
             <a href="{% url 'index' %}" class="btn btn-secondary">Back</a>
         </div>
     </div>

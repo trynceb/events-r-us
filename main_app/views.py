@@ -10,13 +10,17 @@ def home(request):
     return render(request, 'home.html', { 'events': events})
 
 def index(request):
-    return render(request, 'index.html')
+    events = Events.objects.all()
+    return render(request, 'events/index.html', { 'events': events})
 
 def my_events(request):
-    return render(request, 'my_events.html')
+  return render(request, 'my_events.html')
 
-def event_details(request):
-    return render(request, 'details.html')
+def event_details(request, event_id):
+  event= Events.objects.get(id=event_id)
+  return render(request, 'events/details.html', {
+    'events': event
+  })
 
 def signup(request):
   error_message = ''
