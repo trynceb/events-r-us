@@ -16,8 +16,11 @@ def index(request):
 def my_events(request):
   return render(request, 'my_events.html')
 
-def event_details(request):
-    return render(request, 'details.html')
+def event_details(request, event_id):
+  event= Events.objects.get(id=event_id)
+  return render(request, 'events/details.html', {
+    'events': event
+  })
 
 def signup(request):
   error_message = ''
