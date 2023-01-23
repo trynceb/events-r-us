@@ -10,6 +10,9 @@ class HomeView(ListView):
     model = Events
     template_name = 'home.html'
     context_object_name = 'events'
+    
+    def get_queryset(self):
+        return Events.objects.all()[:3]
 
 class IndexView(ListView):
     model = Events
