@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Events
 
 def home(request):
-    events = Events.objects()
+    events = Events.objects.all()
     return render(request, 'home.html', { 'events': events})
 
 def index(request):
