@@ -40,7 +40,7 @@
         </div>
         <form action="" method="POST">
             <h5>Add reviews</h5>
-            <a href="{% url 'review_create' %}">Add review</a>
+            <a href="{% url 'review_create' pk=event.id %}" id ="review-btn">Add review</a>
         </form>
     </div>
 </div>
