@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from us import states
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 CATEGORIES = (
     ('CONCERTS', 'Concerts'),
@@ -49,6 +50,9 @@ class Review(models.Model):
     
     def __str__(self):
         return f"{self.user} - {self.event}"
+
+    def get_absolute_url(self):
+        return reverse_lazy('review_list', args=[self.event.pk])
 
 
 
