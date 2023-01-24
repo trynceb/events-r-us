@@ -4,6 +4,7 @@
 <h1>My Saved Events</h1>
 
 <div class="row">
+    {% for event in event_list %}
     <div class="col s6">
       <div class="card">
         <div class="card-content">
@@ -20,4 +21,5 @@
         </div>
       </div>
     </div>
+    {% endfor %}
 {% endblock %}
