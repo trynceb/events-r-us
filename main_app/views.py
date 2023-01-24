@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView
-from .models import Events
+from .models import Events, Review
 
 class HomeView(ListView):
     model = Events
@@ -43,11 +43,12 @@ class EventDetailsView(DetailView):
     pk_url_kwarg = 'event_id'
     
 class ReviewCreate(CreateView):
-    model = Reviews
+    model = Review
     template_name = 'events/details.html'
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
     
+
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('index')
