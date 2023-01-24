@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, DetailView, CreateView
+from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Events, Review
 
 class HomeView(ListView):
@@ -26,6 +26,31 @@ class IndexView(ListView):
         event = redirect('index')
         request.user.profile.events.add(event)
         return redirect('my_events')
+    
+class EventDetailsView(DetailView):
+    model = Events
+    template_name = 'events/details.html'
+    context_object_name = 'event'
+    pk_url_kwarg = 'pk'
+    
+class ReviewList(ListView):
+    model = Review
+    context_object_name = 'review'
+    
+class ReviewCreate(CreateView):
+    model = Review
+    fields = '__all__'
+    pk_url_kwarg = 'review_id'
+
+class ReviewUpdate(UpdateView):
+    model = Review
+    fields = '__all__'
+    pk_url_kwarg = 'review_id'
+
+class ReviewDelete(DeleteView):
+    model = Review
+    fields = '__all__'
+    pk_url_kwarg = 'review_id'
 
 class MyEventsView(LoginRequiredMixin, TemplateView):
     model = Events
@@ -34,20 +59,9 @@ class MyEventsView(LoginRequiredMixin, TemplateView):
     
     def get_queryset(self):
         return self.request.user.profile.events.all()
-    
 
-class EventDetailsView(DetailView):
-    model = Events
-    template_name = 'events/details.html'
-    context_object_name = 'event'
-    pk_url_kwarg = 'pk'
-    
-class ReviewCreate(CreateView):
-    model = Review
-    template_name = 'events/details.html'
-    context_object_name = 'review'
-    pk_url_kwarg = 'review_id'
-    
+class MyEventsDelete(DeleteView):
+    pass
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
