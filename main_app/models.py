@@ -40,6 +40,16 @@ class Events(models.Model):
     def __str__(self):
         return f"{self.name} - {self.location}"
 
+class Review(models.Model):
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.CharField(max_length=1000, default='', blank=True)
+    date = models.DateField(default=date.today)
+    
+    def __str__(self):
+        return f"{self.user} - {self.event}"
+
 
 
 
