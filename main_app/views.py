@@ -48,7 +48,6 @@ class ReviewCreate(CreateView):
     context_object_name = 'review'
     pk_url_kwarg = 'review_id'
     
-
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('index')
