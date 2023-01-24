@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
@@ -36,32 +37,45 @@ class EventDetailsView(DetailView):
 class ReviewList(ListView):
     model = Review
     context_object_name = 'review'
+    template_name = 'events/review_list.html'
+    pk_url_kwarg = 'pk'
+    
+    def get_queryset(self):
+        event = Events.objects.get(id=self.kwargs['pk'])
+        return Review.objects.filter(event=event)
     
 class ReviewCreate(CreateView):
     model = Review
     fields = '__all__'
     pk_url_kwarg = 'review_id'
+    
+    def form_valid(self, form):
+        form.instance.event = Events.objects.get(id=self.kwargs['pk'])
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ReviewUpdate(UpdateView):
     model = Review
     fields = '__all__'
+    template_name = 'events/review_form.html'
     pk_url_kwarg = 'review_id'
 
 class ReviewDelete(DeleteView):
     model = Review
-    fields = '__all__'
+    template_name = 'events/review_confirm_delete.html'
+    fields = 'review_id'
     pk_url_kwarg = 'review_id'
 
-class MyEventsView(LoginRequiredMixin, TemplateView):
-    model = Events
-    template_name = 'my_events.html'
-    context_object_name = 'events'
-    
-    def get_queryset(self):
-        return self.request.user.profile.events.all()
+@login_required
+def my_events(request):
+    events = request.user.profile.events.all()
+    return render(request, 'my_events.html', {'events': events})
 
 class MyEventsDelete(DeleteView):
-    pass
+    model = Events
+    template_name = 'my_events_confirm_delete.html'
+    pk_url_kwarg = 'event_id'
+    success_url = reverse_lazy('my_events')
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
