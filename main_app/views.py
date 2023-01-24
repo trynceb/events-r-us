@@ -40,7 +40,7 @@ class EventDetailsView(DetailView):
     model = Events
     template_name = 'events/details.html'
     context_object_name = 'event'
-    pk_url_kwarg = 'event_id'
+    pk_url_kwarg = 'pk'
     
 class ReviewCreate(CreateView):
     model = Review
