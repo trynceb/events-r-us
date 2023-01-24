@@ -18,9 +18,23 @@ class IndexView(ListView):
     model = Events
     template_name = 'events/index.html'
     context_object_name = 'events'
+    
+    def get_queryset(self):
+        return Events.objects.all()
+      
+    def save_event(self, request):
+        event = redirect('index')
+        request.user.profile.events.add(event)
+        return redirect('my_events')
 
 class MyEventsView(LoginRequiredMixin, TemplateView):
+    model = Events
     template_name = 'my_events.html'
+    context_object_name = 'events'
+    
+    def get_queryset(self):
+        return self.request.user.profile.events.all()
+    
 
 class EventDetailsView(DetailView):
     model = Events
@@ -28,7 +42,12 @@ class EventDetailsView(DetailView):
     context_object_name = 'event'
     pk_url_kwarg = 'event_id'
     
-
+class ReviewCreate(CreateView):
+    model = Reviews
+    template_name = 'events/details.html'
+    context_object_name = 'review'
+    pk_url_kwarg = 'review_id'
+    
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('index')
