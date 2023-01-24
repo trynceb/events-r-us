@@ -21,9 +21,20 @@ class IndexView(ListView):
     
     def get_queryset(self):
         return Events.objects.all()
+      
+    def save_event(self, request):
+        event = redirect('index')
+        request.user.profile.events.add(event)
+        return redirect('my_events')
 
 class MyEventsView(LoginRequiredMixin, TemplateView):
+    model = Events
     template_name = 'my_events.html'
+    context_object_name = 'events'
+    
+    def get_queryset(self):
+        return self.request.user.profile.events.all()
+    
 
 class EventDetailsView(DetailView):
     model = Events
