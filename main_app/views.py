@@ -53,6 +53,9 @@ class ReviewCreate(CreateView):
         form.instance.event = Events.objects.get(id=self.kwargs['pk'])
         form.instance.user = self.request.user
         return super().form_valid(form)
+      
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
 class ReviewUpdate(UpdateView):
     model = Review
