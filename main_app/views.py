@@ -30,6 +30,13 @@ class EventDetailsView(DetailView):
     template_name = 'events/details.html'
     context_object_name = 'event'
     pk_url_kwarg = 'event_id'
+    
+class ReviewCreate(CreateView):
+    model = Reviews
+    template_name = 'events/details.html'
+    context_object_name = 'review'
+    pk_url_kwarg = 'review_id'
+    
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
