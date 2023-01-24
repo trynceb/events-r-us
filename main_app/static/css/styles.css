@@ -22,7 +22,7 @@
 }
 
 .navbar-nav .nav-item {
-    background-color: #3F51B5; /* or any other color you prefer */
+    background-color: #3fb543; /* or any other color you prefer */
 }
 
 .navbar-nav .nav-item a {
@@ -31,4 +31,24 @@
 
 .nav-link {
     margin: 10px;
+}
+#review-btn{
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:rgb(149, 147, 147);
+}
+.details{
+    margin: 20px;
+    border: 1px solid black;
+}
+.info{
+    padding-bottom: 20px;
+}
+#title{
+    text-align: center;
+    font-weight: bold;
+    color:#3fb543;
+    margin-top: 25px;
+    margin-bottom:50px;
 }
