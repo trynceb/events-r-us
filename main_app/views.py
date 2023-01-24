@@ -18,6 +18,9 @@ class IndexView(ListView):
     model = Events
     template_name = 'events/index.html'
     context_object_name = 'events'
+    
+    def get_queryset(self):
+        return Events.objects.all()
 
 class MyEventsView(LoginRequiredMixin, TemplateView):
     template_name = 'my_events.html'
