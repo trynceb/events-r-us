@@ -21,27 +21,27 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            {% if object%}
+            {% if review %}
             <h5>User Reviews: </h5>
             {% for review in reviews %}
             <div class="review-card">
                 <div class="card-body">
                     <p><strong>{{ review.username }}</strong> - {{ review.review_text }}</p>
                 </div>
+                <div class="card-action">
+                    <a href="{% url 'review_update' review.id %}">Edit</a>
+                    <a href="{% url 'review_delete' review.id %}">Delete</a>
+                </div>
             </div>
             {% endfor %}
-            <form action="" method="POST">
-                <h5>Add reviews</h5>
-                {% csrf_token %}
-                <table>
-                    {{ form.as_table }}
-                </table>
-                <input type="submit" value="Add your review" class="btn">
-            </form>
             {% else %}
             <h1>No reviews</h1>
             {% endif %}
         </div>
+        <form action="" method="POST">
+            <h5>Add reviews</h5>
+            <a href="{% url 'review_create' pk=event.id %}" id ="review-btn">Add review</a>
+        </form>
     </div>
 </div>
 
