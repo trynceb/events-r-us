@@ -52,7 +52,7 @@ class ReviewList(ListView):
 
 class ReviewCreate(LoginRequiredMixin, CreateView):
     model = Review
-    fields = ['user', 'rating', 'comment', 'date']
+    fields = ['rating', 'comment', 'date']
     pk_url_kwarg = 'event_id'
 
     def form_valid(self, form):
