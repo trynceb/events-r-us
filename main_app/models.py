@@ -44,7 +44,8 @@ class Events(models.Model):
 class Review(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE, default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.IntegerField()
+    RATING_CHOICES = [(i, i) for i in range(1,6)]
+    rating = models.IntegerField(choices=RATING_CHOICES)    
     comment = models.CharField(max_length=1000, default='', blank=True)
     date = models.DateField(default=date.today)
     
