@@ -53,18 +53,16 @@ class ReviewList(ListView):
 class ReviewCreate(CreateView):
     model = Review
     fields = ['user', 'rating', 'comment', 'date']
-    
-    pk_url_kwarg = 'review_id'
+    pk_url_kwarg = 'event_id'
 
     def form_valid(self, form):
-        form.instance.event = Events.objects.get(id=self.kwargs['pk'])
+        form.instance.event = Events.objects.get(id=self.kwargs['event_id'])
         form.instance.user = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('details', kwargs={'pk': self.object.event.pk})
-        # return reverse('event_details', kwargs={'pk': self.object.event.pk})
-        # return self.object.get_absolute_url()
+        return reverse('details', kwargs={'event_id': self.object.event.pk})
+
 
 class ReviewUpdate(UpdateView):
     model = Review

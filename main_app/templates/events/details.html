@@ -40,7 +40,9 @@
         {% endif %}
     </div>
     <form action="" method="POST">
-        <a href="{% url 'review_create' pk=event.id %}" id="review-btn">Add review</a>
+        {% if event.id %}
+            <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary">Add Review</a>
+        {% endif %}
     </form>
 </div>
 </div>
