@@ -93,7 +93,7 @@ class MyEventsDelete(LoginRequiredMixin, DeleteView):
     pk_url_kwarg = 'event_id'
     success_url = reverse_lazy('my_events')
 
-class SignUpView(LoginRequiredMixin, CreateView):
+class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('index')
     template_name = 'registration/signup.html'
@@ -105,4 +105,3 @@ class SignUpView(LoginRequiredMixin, CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('index')
-
