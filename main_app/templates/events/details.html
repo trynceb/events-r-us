@@ -25,15 +25,17 @@
             <h5>User Reviews: </h5>
             {% for review in reviews %}
             <div class="card-content">
-                <span class="card-title"> User Name {{ review.user }}</span>
+                <span class="card-title">Name: {{ review.user }}</span>
                 <p>Rating: {{ review.rating }}</p>
                 <p>Comment: {{ review.comment }}</p>
                 <p>Date: {{ review.date }}</p>
             </div>
+            {% if review.user == user %}
             <div class="card-action">
                 <a href="{% url 'review_update' review_id=review.id %}">Edit</a>
                 <a href="{% url 'review_delete' review_id=review.id %}">Delete</a>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
         {% else %}
