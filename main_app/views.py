@@ -35,6 +35,7 @@ class EventDetailsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reviews'] = Review.objects.filter(event=self.object)
+        context['user'] = self.request.user
         return context
 
 
@@ -49,7 +50,7 @@ class ReviewList(ListView):
         event = Events.objects.get(id=self.kwargs['pk'])
         return Review.objects.filter(event=event)
 
-class ReviewCreate(CreateView):
+class ReviewCreate(LoginRequiredMixin, CreateView):
     model = Review
     fields = ['user', 'rating', 'comment', 'date']
     pk_url_kwarg = 'event_id'
@@ -62,7 +63,7 @@ class ReviewCreate(CreateView):
     def get_success_url(self):
         return reverse('details', kwargs={'pk': self.object.event.pk})
 
-class ReviewUpdate(UpdateView):
+class ReviewUpdate(LoginRequiredMixin, UpdateView):
     model = Review
     fields = ['user', 'rating', 'comment', 'date']
     template_name = 'main_app/review_form.html'
@@ -72,7 +73,7 @@ class ReviewUpdate(UpdateView):
         event = self.object.event
         return reverse('details', kwargs={'pk': event.pk})
 
-class ReviewDelete(DeleteView):
+class ReviewDelete(LoginRequiredMixin, DeleteView):
     model = Review
     template_name = 'events/review_confirm_delete.html'
     pk_url_kwarg = 'review_id'
@@ -86,13 +87,13 @@ def my_events(request):
     events = request.user.profile.events.all()
     return render(request, 'my_events.html', {'events': events})
 
-class MyEventsDelete(DeleteView):
+class MyEventsDelete(LoginRequiredMixin, DeleteView):
     model = Events
     template_name = 'my_events_confirm_delete.html'
     pk_url_kwarg = 'event_id'
     success_url = reverse_lazy('my_events')
 
-class SignUpView(CreateView):
+class SignUpView(LoginRequiredMixin, CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('index')
     template_name = 'registration/signup.html'
@@ -105,22 +106,3 @@ class SignUpView(CreateView):
         login(self.request, user)
         return redirect('index')
 
-# def signup(request):
-#   error_message = ''
-#   if request.method == 'POST':
-#     form = UserCreationForm(request.POST)
-#     if form.is_valid():
-#       user = form.save()
-#       login(request, user)
-#       return redirect('index')
-#     else:
-#       error_message = 'Invalid sign up - try again'
-#   form = UserCreationForm()
-#   context = {'form': form, 'error_message': error_message}
-#   return render(request, 'registration/signup.html', context)
-      
-def test(request):
-    pass
-
-class TestClass(LoginRequiredMixin,):
-    pass
