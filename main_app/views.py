@@ -65,8 +65,12 @@ class ReviewCreate(CreateView):
 class ReviewUpdate(UpdateView):
     model = Review
     fields = ['user', 'rating', 'comment', 'date']
-    template_name = 'events/review_form.html'
+    template_name = 'main_app/review_form.html'
     pk_url_kwarg = 'review_id'
+    
+    def get_success_url(self):
+        event = self.object.event
+        return reverse('details', kwargs={'pk': event.pk})
 
 class ReviewDelete(DeleteView):
     model = Review
