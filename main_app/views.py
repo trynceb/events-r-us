@@ -84,9 +84,12 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def my_events(request):
-    events = request.user.profile.events.all()
-    return render(request, 'my_events.html', {'events': events})
-
+    try:
+        events = request.user.profile.events.all()
+        return render(request, 'my_events.html', {'events': events})
+    except:
+        return render(request, 'my_events.html', {'events': None})
+      
 class MyEventsDelete(LoginRequiredMixin, DeleteView):
     model = Events
     template_name = 'my_events_confirm_delete.html'

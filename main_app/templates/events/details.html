@@ -3,39 +3,43 @@
 
 <div class="container">
     <div class="row">
-        <div class="details">
-            <h3 id="title">{{ event.name }}</h3>
-            <ul>
-                <li class="info"><strong>Location: </strong>{{ event.location }}</li>
-                <li class="info"><strong>Date: </strong>{{ event.date }}</li>
-                <li class="info"><strong>Time: </strong>{{ event.time }}</li>
-                <li class="info"><strong>Description: <br></strong>{{ event.description }}</li>
+        <div class="col-sm-12">
+            <h3 id="title" class="text-center">{{ event.name }}</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Location: </strong>{{ event.location }}</li>
+                <li class="list-group-item"><strong>Date: </strong>{{ event.date }}</li>
+                <li class="list-group-item"><strong>Time: </strong>{{ event.time }}</li>
+                <li class="list-group-item"><strong>Description: <br></strong>{{ event.description }}</li>
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <a href="{% url 'index' %}" class="btn btn-secondary">Back</a>
-            <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary">Add Review</a>
+    <div class="row mt-3">
+        <div class="col-sm-6 d-flex justify-content-between">
+            <a href="{% url 'index' %}" class="btn btn-secondary btn-sm mr-2">Back</a>
+            <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary btn-sm">Add Review</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-sm-6">
             {% if reviews %}
             <h5>User Reviews: </h5>
             {% for review in reviews %}
-            <div class="card-content">
-                <span class="card-title">Name: {{ review.user }}</span>
-                <p>Rating: {{ review.rating }}</p>
-                <p>Comment: {{ review.comment }}</p>
-                <p>Date: {{ review.date }}</p>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{ review.user }}</h5>
+                    <div class="card-text d-flex">
+                        <p class="mr-2">Rating: {{ review.rating }}</p>
+                        <p>Comment: {{ review.comment }}</p>
+                    </div>
+                    <p class="card-text">Date: {{ review.date }}</p>
+                    {% if review.user == user %}
+                    <div class="card-action d-flex justify-content-end">
+                        <a href="{% url 'review_update' review_id=review.id %}" class="btn btn-primary btn-sm mr-2">Edit</a>
+                        <a href="{% url 'review_delete' review_id=review.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-            {% if review.user == user %}
-            <div class="card-action">
-                <a href="{% url 'review_update' review_id=review.id %}">Edit</a>
-                <a href="{% url 'review_delete' review_id=review.id %}">Delete</a>
-            </div>
-            {% endif %}
             {% endfor %}
         </div>
         {% else %}
