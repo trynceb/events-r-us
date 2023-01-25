@@ -16,6 +16,7 @@
     <div class="row">
         <div class="col-sm-6">
             <a href="{% url 'index' %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary">Add Review</a>
         </div>
     </div>
     <div class="row">
@@ -39,11 +40,6 @@
         <h1>No reviews</h1>
         {% endif %}
     </div>
-    <form action="" method="POST">
-        {% if event %}
-            <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary">Add Review</a>
-        {% endif %}
-    </form>
 </div>
 </div>
 

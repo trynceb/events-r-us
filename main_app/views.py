@@ -60,8 +60,7 @@ class ReviewCreate(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('details', kwargs={'event_id': self.object.event.pk})
-
+        return reverse('details', kwargs={'pk': self.object.event.pk})
 
 class ReviewUpdate(UpdateView):
     model = Review
