@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Events, Location
+from .models import Events, Location, Review
 
 
 #test test
@@ -7,3 +7,4 @@ from .models import Events, Location
 
 admin.site.register(Events)
 admin.site.register(Location)
+admin.site.register(Review)

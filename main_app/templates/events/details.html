@@ -23,25 +23,26 @@
             {% if review %}
             <h5>User Reviews: </h5>
             {% for review in reviews %}
-            <div class="review-card">
-                <div class="card-body">
-                    <p><strong>{{ review.username }}</strong> - {{ review.review_text }}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'review_update' review.id %}">Edit</a>
-                    <a href="{% url 'review_delete' review.id %}">Delete</a>
-                </div>
+            <div class="card-content">
+                <span class="card-title"> User Name {{ review.user }}</span>
+                <p>Rating: {{ review.rating }}</p>
+                <p>Comment: {{ review.comment }}</p>
+                <p>Date: {{ review.date }}</p>
             </div>
             {% endfor %}
-            {% else %}
-            <h1>No reviews</h1>
-            {% endif %}
+            <div class="card-action">
+                <a href="{% url 'review_update' pk=review.id %}">Edit</a>
+                <a href="{% url 'review_delete' pk=review.id %}">Delete</a>
+            </div>
         </div>
-        <form action="" method="POST">
-            <h5>Add reviews</h5>
-            <a href="{% url 'review_create' pk=event.id %}" id ="review-btn">Add review</a>
-        </form>
+        {% else %}
+        <h1>No reviews</h1>
+        {% endif %}
     </div>
+    <form action="" method="POST">
+        <a href="{% url 'review_create' pk=event.id %}" id="review-btn">Add review</a>
+    </form>
+</div>
 </div>
 
 {% endblock %}
