@@ -91,11 +91,14 @@ class MyEventsView(LoginRequiredMixin, ListView):
         return self.request.user.my_events.all()
       
 class EventAddView(LoginRequiredMixin, View):
+    http_method_names = ['post']
+    
     def post(self, request, event_id):
         event = Events.objects.get(pk=event_id)
         user = request.user
-        user.my_events.add(event)
-        return redirect(reverse('my_events'))
+        profile = user.profile
+        profile.my_events.add(event)
+        return redirect('my_events')
       
 class MyEventsDelete(LoginRequiredMixin, DeleteView):
     model = Events

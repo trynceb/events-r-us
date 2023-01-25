@@ -12,7 +12,10 @@
         <p>Date: {{ event.date }}</p>
         <a href="{% url 'details' event.id %}" class="btn btn-primary">View Event</a>
     </div>
-    <a href="{% url 'event_add' event.id %}" class="btn btn-primary">Save Event</a>
+    <form method="post" action="{% url 'event_add' event.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Save Event</button>
+    </form>
 </div>
 {% endfor %}
 
