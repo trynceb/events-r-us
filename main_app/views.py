@@ -71,10 +71,13 @@ class ReviewUpdate(UpdateView):
 class ReviewDelete(DeleteView):
     model = Review
     template_name = 'events/review_confirm_delete.html'
-    fields = 'review_id'
     pk_url_kwarg = 'review_id'
-@login_required
+    
+    def get_success_url(self):
+        event = self.object.event
+        return reverse('details', kwargs={'pk': event.pk})
 
+@login_required
 def my_events(request):
     events = request.user.profile.events.all()
     return render(request, 'my_events.html', {'events': events})
@@ -99,20 +102,6 @@ class SignUpView(CreateView):
         return redirect('index')
       
       
-# def signup(request):
-#   error_message = ''
-#   if request.method == 'POST':
-#     form = UserCreationForm(request.POST)
-#     if form.is_valid():
-#       user = form.save()
-#       login(request, user)
-#       return redirect('index')
-#     else:
-#       error_message = 'Invalid sign up - try again'
-#   form = UserCreationForm()
-#   context = {'form': form, 'error_message': error_message}
-#   return render(request, 'registration/signup.html', context)
-# @login_required
 def test(request):
     pass
 

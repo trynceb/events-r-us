@@ -7,7 +7,7 @@
 <form action="" method="POST">
     {% csrf_token%}
     <input type="submit" value="I'm sure" class="btn">
-    <a href="{% url 'detail' event.id %}"></a>
+    <a href="{% url 'details' review.id %}"></a>
 </form>
 
 {% endblock %}
