@@ -10,6 +10,7 @@ urlpatterns = [
     path('events/<int:event_id>/reviews/create/', views.ReviewCreate.as_view(), name='review_create'),
     path('reviews/<int:review_id>/update/', views.ReviewUpdate.as_view(), name="review_update"),
     path('events/reviews/<int:review_id>/delete/', views.ReviewDelete.as_view(), name='review_delete'),
-    path('my-events/', views.my_events, name='my_events'),
+    path('my-events/', views.MyEventsView.as_view(), name='my_events'),
+    path('events/<int:event_id>/add/', views.EventAddView.as_view(), name='event_add'),
     path('my-events/<int:event_id>/delete/', views.MyEventsDelete.as_view(), name='my_events_delete'),
 ]

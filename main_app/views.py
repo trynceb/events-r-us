@@ -82,13 +82,20 @@ class ReviewDelete(LoginRequiredMixin, DeleteView):
         event = self.object.event
         return reverse('details', kwargs={'pk': event.pk})
 
-@login_required
-def my_events(request):
-    try:
-        events = request.user.profile.events.all()
-        return render(request, 'my_events.html', {'events': events})
-    except:
-        return render(request, 'my_events.html', {'events': None})
+class MyEventsView(LoginRequiredMixin, ListView):
+    model = Events
+    template_name = 'my_events.html'
+    context_object_name = 'event_list'
+
+    def get_queryset(self):
+        return self.request.user.my_events.all()
+      
+class EventAddView(LoginRequiredMixin, View):
+    def post(self, request, event_id):
+        event = Events.objects.get(pk=event_id)
+        user = request.user
+        user.my_events.add(event)
+        return redirect(reverse('my_events'))
       
 class MyEventsDelete(LoginRequiredMixin, DeleteView):
     model = Events

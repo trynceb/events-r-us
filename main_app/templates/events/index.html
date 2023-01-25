@@ -6,13 +6,13 @@
 {% for event in events %}
 
 <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ event.name }}</span>
-            <p>{{ event.picture }}</p>
-            <p>Date: {{ event.date }}</p>
-            <a href="{% url 'details' event.id %}" class="btn btn-primary">View Event</a>
-        </div>
-    </a>
+    <div class="card-content">
+        <span class="card-title">{{ event.name }}</span>
+        <p>{{ event.picture }}</p>
+        <p>Date: {{ event.date }}</p>
+        <a href="{% url 'details' event.id %}" class="btn btn-primary">View Event</a>
+    </div>
+    <a href="{% url 'event_add' event.id %}" class="btn btn-primary">Save Event</a>
 </div>
 {% endfor %}
 
