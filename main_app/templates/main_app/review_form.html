@@ -2,11 +2,12 @@
 
 {% block content %}
 {% if review %}
-<h1> Edit <span class="teal-text">{{ review.event }}</span></h1>
+<h1> Edit <span class="teal-text">{{ review.event.name }}</span></h1>
 {% else %}
-<h1>Add Review for {{ review.event }}</h1>
+<h1>Add Review for {{ event.name }}</h1>
 {% endif %}
 <form action="" method="POST">
+    <input type="hidden" name="event" value="{{ event.id }}">
     {% csrf_token %}
     <table>
         {{ form.as_table }}

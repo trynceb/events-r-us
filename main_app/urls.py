@@ -8,9 +8,8 @@ urlpatterns = [
     path('events/<int:pk>/', views.EventDetailsView.as_view(), name='details'),
     path('events/<int:pk>/reviews/', views.ReviewList.as_view(), name='review_list'),
     path('events/<int:pk>/reviews/create/', views.ReviewCreate.as_view(), name='review_create'),
-    path('reviews/<int:review_id>/update/', views.ReviewUpdate.as_view(), name='review_update'),
+    path('reviews/<int:review_id>/update/', views.ReviewUpdate.as_view(), name="review_update"),
     path('reviews/<int:review_id>/delete/', views.ReviewDelete.as_view(), name='review_delete'),
     path('my-events/', views.my_events, name='my_events'),
     path('my-events/<int:event_id>/delete/', views.MyEventsDelete.as_view(), name='my_events_delete'),
 ]
-

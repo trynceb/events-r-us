@@ -42,6 +42,7 @@ class Events(models.Model):
         return f"{self.name} - {self.location}"
 
 class Review(models.Model):
+    event = models.ForeignKey(Events, on_delete=models.CASCADE, default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.CharField(max_length=1000, default='', blank=True)
