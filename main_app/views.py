@@ -30,8 +30,14 @@ class IndexView(ListView):
 class EventDetailsView(DetailView):
     model = Events
     template_name = 'events/details.html'
-    context_object_name = 'event'
-    pk_url_kwarg = 'pk'
+    context_object_name = 'review'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.get_object()
+        reviews = Review.objects.filter(event=event)
+        context['reviews'] = reviews
+        return context
 
 class ReviewList(ListView):
     model = Review
@@ -95,6 +101,8 @@ class SignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('index')
+      
+      
 # def signup(request):
 #   error_message = ''
 #   if request.method == 'POST':
