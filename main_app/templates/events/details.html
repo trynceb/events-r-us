@@ -29,18 +29,18 @@
                 <p>Comment: {{ review.comment }}</p>
                 <p>Date: {{ review.date }}</p>
             </div>
-            {% endfor %}
             <div class="card-action">
                 <a href="{% url 'review_update' review_id=review.id %}">Edit</a>
                 <a href="{% url 'review_delete' review_id=review.id %}">Delete</a>
             </div>
+            {% endfor %}
         </div>
         {% else %}
         <h1>No reviews</h1>
         {% endif %}
     </div>
     <form action="" method="POST">
-        {% if event.id %}
+        {% if event %}
             <a href="{% url 'review_create' event_id=event.id %}" class="btn btn-primary">Add Review</a>
         {% endif %}
     </form>

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, View, DetailView, CreateView, UpdateView, DeleteView
 from .models import Events, Review
 
 class HomeView(ListView):
@@ -30,14 +30,13 @@ class IndexView(ListView):
 class EventDetailsView(DetailView):
     model = Events
     template_name = 'events/details.html'
-    context_object_name = 'review'
-    
+    context_object_name = 'event'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        event = self.get_object()
-        reviews = Review.objects.filter(event=event)
-        context['reviews'] = reviews
+        context['reviews'] = Review.objects.filter(event=self.object)
         return context
+
 
 class ReviewList(ListView):
     model = Review
