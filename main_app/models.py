@@ -13,8 +13,7 @@ CATEGORIES = (
 STATES = [(state.abbr, state.name) for state in states.STATES]
 
 # Create your models here.
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     
 class Location(models.Model):
     city = models.CharField(max_length=100)
@@ -54,6 +53,11 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('review_list', args=[self.event.pk])
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    my_events = models.ManyToManyField(Events, blank=True)
 
 
 
