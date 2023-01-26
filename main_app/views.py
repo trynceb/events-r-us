@@ -89,16 +89,21 @@ class MyEventsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.request.user.my_events.all()
+
+def save_event(request, event_id):
+    event = Events.objects.get(id=event_id)
+    profile = request.user.profile
+    profile.my_events.add(event)
+    profile.save()
+    return redirect('events_page')
       
 class EventAddView(LoginRequiredMixin, View):
     http_method_names = ['post']
-    
     def post(self, request, event_id):
         event = Events.objects.get(pk=event_id)
         user = request.user
-        profile = user.profile
-        profile.my_events.add(event)
-        return redirect('my_events')
+        user.my_events.add(event)
+        return redirect(reverse('my_events'))
       
 class MyEventsDelete(LoginRequiredMixin, DeleteView):
     model = Events
