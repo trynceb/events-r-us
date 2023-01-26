@@ -1,16 +1,16 @@
-#Events-R-Us
-- Event Tracker
+# Events-R-Us
+The objective of Events-R-Us is to help the user search for different events such as concerts, festivals, or other events of various types. The user of this page is then able to go into the details page of the event they are interested in and see information regarding the location, date and time of the event.
 
 Access:
 
-#Technologies used:
+## Technologies used:
 - CSS
 - HTML
 - Python
 - Django
 - Bootstrap
 
-##User Stories:
+## User Stories:
 - AAU, I want to be able to log in and log out.
 - AAU, I want to be able to create a review or comment on an event(Only if logged in).
 - AAU, I want to be able to delete a review I have created.
@@ -18,7 +18,8 @@ Access:
 - AAU I want to be able to click an event and see the details.
 - AAU I want to be able to rate an event.
 
-Wireframe: 
+## Wireframe:
+
 [![H0W1Yjj.md.png](https://iili.io/H0W1Yjj.md.png)](https://freeimage.host/i/H0W1Yjj)
 [![H0W1OnR.md.png](https://iili.io/H0W1OnR.md.png)](https://freeimage.host/i/H0W1OnR)
 [![H0W122t.md.png](https://iili.io/H0W122t.md.png)](https://freeimage.host/i/H0W122t)
