@@ -3,8 +3,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>Events-R-Us</h1>
+        <div class="col-md-12 text-center my-5">
+            <h1 class="text-primary">Events-R-Us</h1>
         </div>
     </div>
     <div class="row">
@@ -12,7 +12,6 @@
             <div class="card-columns">
                 {% for event in events %}
                     <div class="card">
-                        <img src="{{ event.image.url }}" class="card-img-top" alt="event image">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.name }}</h5>
                             <p class="card-text">{{ event.description }}</p>
