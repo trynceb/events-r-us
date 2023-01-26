@@ -26,9 +26,11 @@
             {% for review in reviews %}
             <div class="card mt-3">
                 <div class="card-body">
-                    <h5 class="card-title">Name: {{ review.user }}</h5>
+                    <h5 class="card-title">{{ review.user }}</h5><br>
                     <div class="card-text d-flex">
                         <p class="mr-2">Rating: {{ review.rating }}</p>
+                    </div>
+                    <div>
                         <p>Comment: {{ review.comment }}</p>
                     </div>
                     <p class="card-text">Date: {{ review.date }}</p>
