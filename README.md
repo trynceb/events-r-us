@@ -1,7 +1,12 @@
 # Events-R-Us
+
+[![H0gq2us.md.png](https://iili.io/H0gq2us.md.png)](https://freeimage.host/i/H0gq2us)
+
+## Description
 The objective of Events-R-Us is to help the user search for different events such as concerts, festivals, or other events of various types. The user of this page is then able to go into the details page of the event they are interested in and see information regarding the location, date and time of the event.
 
-Access:
+## Access:
+https://eventsrus.herokuapp.com/
 
 ## Technologies used:
 - CSS
